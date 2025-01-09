@@ -8,7 +8,7 @@ import os
 import pickle
 from queue import Queue
 
-def choose_action(pos: float, v: float, last_action: float) -> int:
+def choose_action(pos: float, v: float, last_action: float) -> [float]:
     """Return the action for the car to proceed the next move.
     Args:
         pos: Car's position, a float ranges between [-1.2, 0.6].
@@ -27,18 +27,18 @@ def choose_action(pos: float, v: float, last_action: float) -> int:
 
     # Define thresholds for decision making
     if v < 0 and pos > target_pos:
-        return 0  # Accelerate left if moving backwards and past target
+        return [1]  # Accelerate left if moving backwards and past target
     elif v > 0 and pos < target_pos:
-        return 2  # Accelerate right if moving forwards and before target
+        return [1]  # Accelerate right if moving forwards and before target
     elif abs(distance_to_target) < 0.1:  # If close to target, stabilize
-        return 1  # Don't accelerate, maintain current state
+        return [1]  # Don't accelerate, maintain current state
     elif distance_to_target > 0:
-        return 2  # Move right towards the target
+        return [1]  # Move right towards the target
     else:
-        return 0  # Move left away from the target
+        return [0.5]  # Move left away from the target
 
 def run_test():
-    env = gym.make('MountainCar-v0', render_mode='human')
+    env = gym.make('MountainCarContinuous-v0', render_mode='human')
     observation, _ = env.reset()  # 状态包括以下因素
     action = 1
 

@@ -16,7 +16,7 @@ def evaluate(env: gym.Env, action_select: callable) -> float:
     """Evaluate heuristic function on car mountain problem."""
 
     observation, _ = env.reset()  # initialization
-    action = 0  # initial action, stay static
+    action = [0]  # initial action, stay static
 
     for i in range(env._max_episode_steps):
         action = action_select(observation[0], observation[1], action)
