@@ -50,7 +50,7 @@ class CarMountain(Evaluation):
         )
 
         self.env = None
-        self.env = gym.make('MountainCar-v0')
+        self.env = gym.make('MountainCarContinuous-v0')
         self.env._max_episode_steps = max_steps
 
     def evaluate_program(self, program_str: str, callable_func: callable) -> Any | None:

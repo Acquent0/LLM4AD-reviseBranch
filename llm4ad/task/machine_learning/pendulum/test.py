@@ -28,8 +28,9 @@ observation, _ = env.reset()
 done = False
 step = 0
 action = 0.0  # 初始动作
+env._max_episode_steps = 500
 
-while not done:
+while not done and step < 500:
     step += 1
     x, y, angular_velocity = observation  # 提取状态信息 (cos(theta), sin(theta), angular_velocity)
     action = choose_action(x, y, angular_velocity, action)  # 决策动作
